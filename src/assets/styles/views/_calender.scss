@@ -1,0 +1,16 @@
+.calender-app {
+  margin-block-start: rem(20px);
+  width: 770px;
+  // justify-content: center;
+  .calender {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    h3 {
+      color: $clrP;
+      font-size: rem(14px);
+      text-align: center;
+      text-transform: capitalize;
+    }
+  }
+  .calender-header {
+  }
+}

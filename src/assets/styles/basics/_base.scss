@@ -1,0 +1,61 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: Mons-Regular, sans-serif;
+  color: $clrB;
+  scroll-behavior: smooth;
+}
+
+main {
+  // min-height: 80vh;
+  justify-content: center;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: Mons-Bold, sans-serif;
+  color: $clrB;
+}
+
+.btn {
+  font-family: inherit;
+  font-size: inherit;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: inherit;
+  min-height: rem(40px);
+  min-width: rem(40px);
+  border-radius: rem(8px);
+  transition: ease-in-out 0.25s;
+}
+
+a {
+  display: block;
+  outline: none;
+  text-decoration: none;
+  color: $clrB;
+  &:visited {
+    color: $clrB;
+  }
+}
+
+img {
+  width: 100%;
+  height: 100%;
+}
+
+ul {
+  list-style-type: none;
+}
