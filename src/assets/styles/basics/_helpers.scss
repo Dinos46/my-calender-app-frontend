@@ -47,12 +47,17 @@
     flex-direction: column-reverse;
   }
 }
-.hide {
-  display: none;
+.empty {
+  opacity: 0;
 }
 
 .grid {
   display: grid;
+}
+
+.current {
+  background-color: $clrP;
+  border-radius: 50%;
 }
 
 // separator horizontal

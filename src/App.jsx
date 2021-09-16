@@ -10,7 +10,7 @@ export const App = () => {
     <div className=''>
       <Router>
         <Header />
-        <main className='full grid'>
+        <main className='full main-container'>
           <Switch>
             {routes.map(({ path, component }) => (
               <Route path={path} component={component} key={path} />

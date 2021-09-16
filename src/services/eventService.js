@@ -1,5 +1,5 @@
-import { httpService } from './http-service';
-import { utilService } from './util-service';
+// import { httpService } from './httpService';
+import { utilService } from './utilService';
 
 export const eventService = {
     query,
@@ -12,22 +12,22 @@ const events = [
     {
         _id: utilService.makeId(),
         description: 'go to meeting',
-        date: '1/1/2020'
+        date: '9/6/2021'
     },
     {
         _id: utilService.makeId(),
         description: 'go to buy stuff',
-        date: '1/1/2020'
+        date: '11/8/2021'
     },
     {
         _id: utilService.makeId(),
         description: 'learn more js',
-        date: '1/1/2020'
+        date: '8/9/2021'
     },
     {
         _id: utilService.makeId(),
         description: 'learn more reactjs',
-        date: '1/1/2020'
+        date: '9/9/2021'
     }
 ];
 
@@ -43,7 +43,7 @@ async function query() {
 
 async function getById(id) {
     try {
-        return await httpService.get(`event/${id}`)
+        // return await httpService.get(`event/${id}`)
     } catch (err) {
         console.error(`cant find event ${id}`)
     }
@@ -52,9 +52,9 @@ async function getById(id) {
 async function save(ev) {
     try {
         if (ev._id) {
-            return await httpService.put(`event/${ev._id}`, ev)
+            // return await httpService.put(`event/${ev._id}`, ev)
         } else {
-            return await httpService.post('event/', ev)
+            // return await httpService.post('event/', ev)
         }
     } catch (err) {
         console.error('cant save stay', err)
@@ -63,7 +63,7 @@ async function save(ev) {
 
 async function remove(id) {
     try {
-        return await httpService.delete(`event/${id}`)
+        // return await httpService.delete(`event/${id}`)
     } catch (err) {
         console.error('cant authorized!', err)
     }

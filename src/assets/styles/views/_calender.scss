@@ -1,16 +1,41 @@
 .calender-app {
-  margin-block-start: rem(20px);
-  width: 770px;
-  // justify-content: center;
+  flex-direction: column;
   .calender {
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    margin-block-start: rem(20px);
+    grid-template-columns: repeat(7, 1fr);
+    justify-items: center;
+    gap: 5px;
+    margin-block-start: rem(20px);
+
     h3 {
-      color: $clrP;
-      font-size: rem(14px);
+      color: $clrB;
+      font-size: rem(12px);
       text-align: center;
       text-transform: capitalize;
     }
   }
   .calender-header {
+    color: $clrP;
+    justify-content: space-between;
+    margin-block: rem(22px);
+    h2 {
+      color: $clrP;
+    }
+  }
+  .day-tile {
+    padding: rem(12px);
+    cursor: pointer;
+    transition: ease-in-out 0.25s;
+    &:hover {
+      background-color: lighten($clrG, $amount: 10%);
+    }
+  }
+  @media screen and(min-width:$mobile-breakpoint) {
+    .calender {
+      gap: 10px;
+      h3 {
+        font-size: 14px;
+      }
+    }
   }
 }

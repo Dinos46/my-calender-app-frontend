@@ -1,8 +1,19 @@
 import { useState, useEffect } from 'react';
 import { CalenderHeader } from '../cmps/CalenderHeader';
+import { CalenderBody } from '../cmps/CalenderBody';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllEvents } from '../store/slices/eventSlice';
+import { createCalenderDays } from '../services/calenderService';
 
 export const Calender = () => {
-  const [currMonth, setCurrMonth] = useState(8);
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state.event.events);
+  const evForDate = (date) => {
+    console.log(date);
+    return state.find((ev) => ev.date === date);
+  };
+
+  const [monthNav, setMonthNav] = useState(0);
   const [selectedDay, setselectedDay] = useState(null);
   const [days, setDays] = useState([]);
   const [dateToDisplay, setDateToDisplay] = useState('');
@@ -15,14 +26,17 @@ export const Calender = () => {
     'friday',
     'saturday',
   ];
+  useEffect(() => {
+    dispatch(getAllEvents());
+  }, [dispatch]);
 
   useEffect(() => {
     const date = new Date();
+    if (monthNav !== 0) {
+      date.setMonth(new Date().getMonth() + monthNav);
+    }
     const month = date.getMonth();
-    setCurrMonth(month);
-    const day = date.getDate();
     const year = date.getFullYear();
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
     const firstDayOfMonth = new Date(year, month, 1);
     const dateStr = firstDayOfMonth.toLocaleDateString('en-us', {
       weekday: 'long',
@@ -36,34 +50,35 @@ export const Calender = () => {
     const emptyDaySquare = weekDays.indexOf(
       dateStr.split(', ')[0].toLocaleLowerCase()
     );
-    const daysArr = [];
-    for (let i = 1; i <= emptyDaySquare + daysInMonth; i++) {
-      const dayStr = `${month + 1}/${i - emptyDaySquare}/${year}`;
-      if (i > emptyDaySquare) {
-        daysArr.push({
-          value: i - emptyDaySquare,
-          isCurrDay: i - emptyDaySquare === day,
-          date: dayStr,
-        });
-      } else {
-        daysArr.push({
-          value: 'empty',
-          isCurrDay: null,
-          date: '',
-        });
-      }
-      setDays(daysArr);
-    }
-  }, [currMonth]);
+    const daysArr = createCalenderDays(emptyDaySquare, evForDate, monthNav);
+    setDays(daysArr);
+  }, [monthNav, state]);
+
+  const onNextMonth = () => setMonthNav(monthNav + 1);
+  const onPrevMonth = () => setMonthNav(monthNav - 1);
+  const onSelect = (date) => {
+    console.log(date);
+    setselectedDay(date);
+  };
 
   return (
     <section className='calender-app'>
-      <CalenderHeader date={dateToDisplay} />
+      <CalenderHeader
+        date={dateToDisplay}
+        onNext={onNextMonth}
+        onPrev={onPrevMonth}
+      />
       <div className='calender grid'>
-        {weekDays.map((day) => (
-          <h3 key={day} className={`day ${day}`}>
-            {day}
-          </h3>
+        {weekDays.map((day) => {
+          const shortDayName = day.replace('day', '');
+          return (
+            <h3 key={day} className={`day ${day}`}>
+              {shortDayName}
+            </h3>
+          );
+        })}
+        {days.map((day, idx) => (
+          <CalenderBody day={day} key={day.value + idx} onSelect={onSelect} />
         ))}
       </div>
     </section>
