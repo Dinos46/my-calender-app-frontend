@@ -1,10 +1,32 @@
 footer {
-  padding: rem(20px);
+  padding: rem(10px);
   align-items: center;
+  flex-direction: column;
   justify-content: center;
-  background-color: $clrP;
   margin-block-start: rem(20px);
-  h2 {
-    color: $clrW;
+  box-shadow: $boxShadow;
+  .links {
+    align-items: center;
+    justify-content: center;
+    margin-block-start: rem(10px);
+    > *:not(:first-child) {
+      margin-inline-start: rem(10px);
+    }
+    svg {
+      font-size: rem(35px);
+    }
+  }
+  &.dark {
+    background-color: $clrP;
+    transition: ease-in-out 0.3s;
+    h3 {
+      color: $clrW;
+      transition: ease-in-out 0.3s;
+    }
+  }
+  &.light {
+    transition: ease-in-out 0.3s;
+    color: $clrB;
+    background-color: $clrW;
   }
 }

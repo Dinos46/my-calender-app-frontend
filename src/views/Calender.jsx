@@ -8,8 +8,8 @@ import { createCalenderDays } from '../services/calenderService';
 export const Calender = () => {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.event.events);
+  const isDark = useSelector((state) => state.theme.isDark);
   const evForDate = (date) => {
-    console.log(date);
     return state.find((ev) => ev.date === date);
   };
 
@@ -28,7 +28,14 @@ export const Calender = () => {
   ];
   useEffect(() => {
     dispatch(getAllEvents());
-  }, [dispatch]);
+    if (isDark) {
+      document.body.classList.remove('light');
+      document.body.classList.add('dark');
+    } else {
+      document.body.classList.remove('dark');
+      document.body.classList.add('light');
+    }
+  }, [dispatch, isDark]);
 
   useEffect(() => {
     const date = new Date();
@@ -57,7 +64,6 @@ export const Calender = () => {
   const onNextMonth = () => setMonthNav(monthNav + 1);
   const onPrevMonth = () => setMonthNav(monthNav - 1);
   const onSelect = (date) => {
-    console.log(date);
     setselectedDay(date);
   };
 
@@ -78,7 +84,12 @@ export const Calender = () => {
           );
         })}
         {days.map((day, idx) => (
-          <CalenderBody day={day} key={day.value + idx} onSelect={onSelect} />
+          <CalenderBody
+            day={day}
+            key={day.value + idx}
+            onSelect={onSelect}
+            isDark={isDark}
+          />
         ))}
       </div>
     </section>

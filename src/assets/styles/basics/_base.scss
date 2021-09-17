@@ -7,18 +7,28 @@
 }
 
 html {
+  height: 100vh;
   font-family: Mons-Regular, sans-serif;
   color: $clrB;
   scroll-behavior: smooth;
 }
 
 body {
-  background-color: $clrG;
+  &.dark {
+    background-color: $clrB;
+    color: $clrW;
+    transition: ease-in-out 0.3s;
+  }
+  &.light {
+    background-color: $clrW;
+    color: $clrB;
+    transition: ease-in-out 0.3s;
+  }
 }
 
 main {
-  min-height: 73vh;
   justify-content: center;
+  min-height: 72vh;
 }
 
 h1,

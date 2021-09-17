@@ -9,7 +9,6 @@ export const createCalenderDays = (emptyDaySquare, evForDate, monthNav) => {
     const daysArr = [];
     for (let i = 1; i <= emptyDaySquare + daysInMonth; i++) {
         const dayStr = `${month + 1 + monthNav}/${i - emptyDaySquare}/${year}`;
-        console.log(dayStr)
         if (i > emptyDaySquare) {
             daysArr.push({
                 value: i - emptyDaySquare,

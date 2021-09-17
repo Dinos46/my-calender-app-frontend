@@ -1,37 +1,49 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import { useSelector, useDispatch } from 'react-redux';
+import { changeToDark, changeToLight } from '../store/slices/themeSlice';
+import { ChangeMode } from './ChangeMode';
 
 export const Header = () => {
+  const isDark = useSelector((state) => state.theme.isDark);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    console.log(isDark);
+  }, [isDark]);
   const useStyles = makeStyles((theme) => ({
-    root: {
-      flexGrow: 1,
+    dark: {
+      backgroundColor: '#a513d8',
       color: '#fbfbfb',
     },
+    light: {
+      backgroundColor: '#fbfbfb',
+      color: '#191011',
+    },
     menuButton: {
+      color: isDark ? '#fbfbfb' : '#191011',
       marginRight: theme.spacing(2),
-      color: 'inherit',
     },
     title: {
+      color: isDark ? '#fbfbfb' : '#191011',
       flexGrow: 1,
-      color: 'inherit',
     },
     backgroundColor: {
-      backgroundColor: '#a513d8',
+      backgroundColor: 'inherit',
     },
   }));
+
   const classes = useStyles();
   return (
-    <header className={classes.root}>
+    <header className={isDark ? classes.dark : classes.light}>
       <AppBar position='static' className={classes.backgroundColor}>
         <Toolbar>
-          <Typography variant='h5' className={classes.title}>
-            Header
+          <Typography variant='h4' className={classes.title}>
+            MyCalender
           </Typography>
           <IconButton
             edge='start'
@@ -40,7 +52,7 @@ export const Header = () => {
           >
             <MenuIcon />
           </IconButton>
-          {/* <Button color='inherit'>Login</Button> */}
+          <ChangeMode />
         </Toolbar>
       </AppBar>
     </header>
