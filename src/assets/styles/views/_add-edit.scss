@@ -1,0 +1,31 @@
+.add-edit {
+  form {
+    flex-direction: column;
+    .content-container {
+      flex-direction: column;
+      margin-block-start: rem(20px);
+      input {
+        padding: rem(5px);
+        border-radius: rem(5px);
+        border: none;
+        outline: none;
+      }
+      label {
+        cursor: pointer;
+        margin-block: rem(10px);
+        text-transform: capitalize;
+      }
+    }
+    .btn-container {
+      margin-block-start: rem(20px);
+      > button:first-child {
+        margin-inline-end: rem(20px);
+      }
+      button {
+        border-radius: 50%;
+        padding: rem(5px);
+        background-color: $clrP;
+      }
+    }
+  }
+}

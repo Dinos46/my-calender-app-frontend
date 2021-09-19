@@ -1,70 +1,53 @@
-// import { httpService } from './httpService';
-import { utilService } from './utilService';
+import Axios from 'axios';
 
 export const eventService = {
     query,
     getById,
     save,
     remove,
-}
+};
 
-const events = [
-    {
-        _id: utilService.makeId(),
-        description: 'go to meeting',
-        date: '9/6/2021'
-    },
-    {
-        _id: utilService.makeId(),
-        description: 'go to buy stuff',
-        date: '11/8/2021'
-    },
-    {
-        _id: utilService.makeId(),
-        description: 'learn more js',
-        date: '8/9/2021'
-    },
-    {
-        _id: utilService.makeId(),
-        description: 'learn more reactjs',
-        date: '9/9/2021'
-    }
-];
+const BASE_URL = process.env.NODE_ENV === 'production'
+    ? '/api/'
+    : 'http://localhost:5000/api/';
 
 
 async function query() {
     try {
-        return Promise.resolve(events)
-        // return await httpService.get('event')
+        const { data } = await Axios.get(`${BASE_URL}event/`);
+        return data;
     } catch (err) {
-        console.error('cant get events', err)
-    }
-}
+        console.error('cant get events', err);
+    };
+};
 
-async function getById(id) {
+async function getById(_id) {
     try {
-        // return await httpService.get(`event/${id}`)
+        const { data } = await Axios.get(`${BASE_URL}event/${_id}`);
+        return data;
     } catch (err) {
-        console.error(`cant find event ${id}`)
-    }
-}
+        console.log('cant get stay', err);
+    };
+};
 
 async function save(ev) {
     try {
         if (ev._id) {
-            // return await httpService.put(`event/${ev._id}`, ev)
+            const { data } = await Axios.put(`${BASE_URL}event/${ev._id}`, ev);
+            return data
         } else {
-            // return await httpService.post('event/', ev)
-        }
+            const { data } = await Axios.post(`${BASE_URL}event/`, ev);
+            return data
+        };
     } catch (err) {
-        console.error('cant save stay', err)
-    }
-}
+        console.error('cant save event', err);
+    };
+};
 
-async function remove(id) {
+async function remove(evId) {
     try {
-        // return await httpService.delete(`event/${id}`)
+        await Axios.delete(`${BASE_URL}event/${evId}`);
     } catch (err) {
-        console.error('cant authorized!', err)
-    }
-}
+        console.error(`cant remove event ${evId}`, err);
+    };
+};

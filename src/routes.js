@@ -1,14 +1,14 @@
-import { Calender } from './views/Calender';
-import { AddEditEvent } from './views/AddEditEvent';
+import { Calendar } from './views/Calendar/Calendar';
+import { AddEditEvent } from './views/AddEditEvent/AddEditEvent';
 
 export const routes = [
     {
-        path: '/save',
+        path: '/save/:_id?',
         component: AddEditEvent
     },
     {
         path: '/',
-        component: Calender
+        component: Calendar
     }
 
 ];

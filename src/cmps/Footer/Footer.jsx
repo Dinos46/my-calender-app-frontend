@@ -1,7 +1,10 @@
+//GET STATE
 import { useSelector } from 'react-redux';
+//UI COMPONENTS
 import GitHubIcon from '@material-ui/icons/GitHub';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import Link from '@material-ui/core/Link';
+
 export const Footer = () => {
   const isDark = useSelector((state) => state.theme.isDark);
 

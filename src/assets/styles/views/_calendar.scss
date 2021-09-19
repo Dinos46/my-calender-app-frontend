@@ -1,6 +1,6 @@
-.calender-app {
+.calendar-app {
   flex-direction: column;
-  .calender {
+  .calendar {
     margin-block-start: rem(20px);
     grid-template-columns: repeat(7, 1fr);
     justify-items: center;
@@ -14,7 +14,7 @@
       text-transform: capitalize;
     }
   }
-  .calender-header {
+  .calendar-header {
     color: $clrP;
     justify-content: space-between;
     margin-block: rem(22px);
@@ -23,18 +23,32 @@
     }
   }
   .day-tile {
-    padding: rem(12px);
+    padding: rem(8px);
+    text-align: center;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
+    font-size: rem(14px);
     transition: ease-in-out 0.25s;
+    flex-direction: column;
+    .ev-title {
+      font-size: rem(8px);
+      color: $clrP;
+    }
     &:hover {
-      background-color: lighten($clrG, $amount: 10%);
+      background-color: lighten($clrP, $amount: 10%);
     }
   }
   @media screen and(min-width:$mobile-breakpoint) {
-    .calender {
+    .calendar {
       gap: 10px;
-      h3 {
-        font-size: 14px;
+      .day-tile {
+        padding: rem(5px);
+        font-size: rem(18px);
+        .ev-title {
+          font-size: rem(8px);
+          color: $clrP;
+        }
       }
     }
   }

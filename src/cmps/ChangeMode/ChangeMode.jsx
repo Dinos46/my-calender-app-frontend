@@ -1,14 +1,14 @@
-import React from 'react';
+//UI COMPONENTS
 import { styled } from '@material-ui/core/styles';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
+//GET STATE
 import { useDispatch, useSelector } from 'react-redux';
-import { changeToDark, changeToLight } from '../store/slices/themeSlice';
+import { changeToDark, changeToLight } from '../../store/slices/themeSlice';
 
 export const ChangeMode = () => {
   const dispatch = useDispatch();
   const isDark = useSelector((state) => state.theme.isDark);
-  console.log(isDark);
   const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     width: 62,
     height: 34,
@@ -63,12 +63,10 @@ export const ChangeMode = () => {
       dispatch(changeToDark());
     }
   };
-
   return (
     <div>
       <FormControlLabel
-        control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked />}
-        checked={isDark}
+        control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked={isDark} />}
         onChange={handleChange}
       />
     </div>

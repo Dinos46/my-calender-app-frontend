@@ -1,20 +1,17 @@
-import React, { useEffect } from 'react';
+//UI COMPONNETS
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import { useSelector, useDispatch } from 'react-redux';
-import { changeToDark, changeToLight } from '../store/slices/themeSlice';
-import { ChangeMode } from './ChangeMode';
+import { ChangeMode } from '../ChangeMode/ChangeMode';
+//GET STATE
+import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
 
 export const Header = () => {
   const isDark = useSelector((state) => state.theme.isDark);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    console.log(isDark);
-  }, [isDark]);
+  const history = useHistory();
+
   const useStyles = makeStyles((theme) => ({
     dark: {
       backgroundColor: '#a513d8',
@@ -36,22 +33,19 @@ export const Header = () => {
       backgroundColor: 'inherit',
     },
   }));
-
   const classes = useStyles();
+  const goToHomePage = () => {
+    history.push('/');
+  };
   return (
     <header className={isDark ? classes.dark : classes.light}>
       <AppBar position='static' className={classes.backgroundColor}>
         <Toolbar>
           <Typography variant='h4' className={classes.title}>
-            MyCalender
+            <button className='btn' onClick={goToHomePage}>
+              MyCalendar
+            </button>
           </Typography>
-          <IconButton
-            edge='start'
-            className={classes.menuButton}
-            aria-label='menu'
-          >
-            <MenuIcon />
-          </IconButton>
           <ChangeMode />
         </Toolbar>
       </AppBar>

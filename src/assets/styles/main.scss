@@ -12,6 +12,8 @@
 //COMPONENTS
 @import './cmps/footer';
 @import './cmps/header';
+@import './cmps/loader';
 
 //VIEWS
-@import './views//calender';
+@import './views/calendar';
+@import './views/add-edit';

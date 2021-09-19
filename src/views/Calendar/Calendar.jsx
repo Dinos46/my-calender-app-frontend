@@ -1,20 +1,28 @@
 import { useState, useEffect } from 'react';
-import { CalenderHeader } from '../cmps/CalenderHeader';
-import { CalenderBody } from '../cmps/CalenderBody';
+//GET STATE
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllEvents } from '../store/slices/eventSlice';
-import { createCalenderDays } from '../services/calenderService';
+import { setSelectedEv } from '../../store/slices/eventSlice';
+import { getAllEvents } from '../../store/thunks/eventThunk';
+//COMPONENTS
+import { CalendarHeader } from '../Calendar/cmps/CalendarHeader';
+import { CalendarBody } from '../Calendar/cmps/CalendarBody';
+import { Loader } from '../../cmps/loader/Loader';
+//CALENDAR LOGIC
+import { createCalendarDays } from '../../services/calendarService';
 
-export const Calender = () => {
+export const Calendar = () => {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.event.events);
+  const status = useSelector((state) => state.event.status);
+  console.log(status);
   const isDark = useSelector((state) => state.theme.isDark);
   const evForDate = (date) => {
-    return state.find((ev) => ev.date === date);
+    if (date) {
+      const evDate = state?.find((ev) => ev?.date === date);
+      return evDate;
+    }
   };
-
   const [monthNav, setMonthNav] = useState(0);
-  const [selectedDay, setselectedDay] = useState(null);
   const [days, setDays] = useState([]);
   const [dateToDisplay, setDateToDisplay] = useState('');
   const weekDays = [
@@ -57,34 +65,35 @@ export const Calender = () => {
     const emptyDaySquare = weekDays.indexOf(
       dateStr.split(', ')[0].toLocaleLowerCase()
     );
-    const daysArr = createCalenderDays(emptyDaySquare, evForDate, monthNav);
+    const daysArr = createCalendarDays(emptyDaySquare, evForDate, monthNav);
     setDays(daysArr);
-  }, [monthNav, state]);
+  }, [state, monthNav]);
 
   const onNextMonth = () => setMonthNav(monthNav + 1);
   const onPrevMonth = () => setMonthNav(monthNav - 1);
   const onSelect = (date) => {
-    setselectedDay(date);
+    dispatch(setSelectedEv(date));
   };
-
+  if (status === 'failed') return <h2>cant get data, somthing went wrong</h2>;
+  if (status === 'loading') return <Loader />;
   return (
-    <section className='calender-app'>
-      <CalenderHeader
+    <section className='calendar-app'>
+      <CalendarHeader
         date={dateToDisplay}
         onNext={onNextMonth}
         onPrev={onPrevMonth}
       />
-      <div className='calender grid'>
+      <div className='calendar grid'>
         {weekDays.map((day) => {
           const shortDayName = day.replace('day', '');
           return (
-            <h3 key={day} className={`day ${day}`}>
+            <h3 key={day} className={`day ${day} ${isDark ? 'dark' : ''}`}>
               {shortDayName}
             </h3>
           );
         })}
-        {days.map((day, idx) => (
-          <CalenderBody
+        {days?.map((day, idx) => (
+          <CalendarBody
             day={day}
             key={day.value + idx}
             onSelect={onSelect}

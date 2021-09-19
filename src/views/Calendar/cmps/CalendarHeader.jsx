@@ -1,9 +1,9 @@
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
-export const CalenderHeader = ({ date, onNext, onPrev }) => {
+export const CalendarHeader = ({ date, onNext, onPrev }) => {
   return (
-    <section className='calender-header flex'>
+    <section className='calendar-header flex'>
       <button className='btn' onClick={onPrev}>
         <ArrowBackIosIcon />
       </button>

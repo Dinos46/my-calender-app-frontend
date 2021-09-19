@@ -1,11 +1,9 @@
-export const createCalenderDays = (emptyDaySquare, evForDate, monthNav) => {
-
+export const createCalendarDays = (emptyDaySquare, evForDate, monthNav) => {
     const date = new Date();
     const month = date.getMonth();
     const day = date.getDate();
     const year = date.getFullYear();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
-
     const daysArr = [];
     for (let i = 1; i <= emptyDaySquare + daysInMonth; i++) {
         const dayStr = `${month + 1 + monthNav}/${i - emptyDaySquare}/${year}`;
@@ -23,7 +21,7 @@ export const createCalenderDays = (emptyDaySquare, evForDate, monthNav) => {
                 date: '',
                 event: null
             });
-        }
-    }
-    return daysArr
-}
+        };
+    };
+    return daysArr;
+};

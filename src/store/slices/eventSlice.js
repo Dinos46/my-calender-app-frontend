@@ -1,31 +1,20 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { eventService } from '../../services/eventService';
-
-export const getAllEvents = createAsyncThunk(
-    'events/getAllEvents',
-    async () => {
-        return await eventService.query()
-    }
-)
+import { createSlice } from "@reduxjs/toolkit";
+import { eventReducer } from "../reducers/eventReducer";
 
 const eventSlice = createSlice({
     name: 'events',
     initialState: {
         events: [],
-        status: null
+        status: null,
+        selectedEv: null
     },
-    extraReducers: {
-        [getAllEvents.pending]: (state, action) => {
-            state.status = 'loading';
-        },
-        [getAllEvents.fulfilled]: (state, { payload }) => {
-            state.events = payload;
-            state.status = 'success';
-        },
-        [getAllEvents.rejected]: (state, action) => {
-            state.status = 'failed';
+    reducers: {
+        setSelectedEv: (state, { payload }) => {
+            state.selectedEv = payload
         }
-    }
-})
+    },
+    extraReducers: eventReducer
+});
 
-export default eventSlice.reducer
+export const { setSelectedEv } = eventSlice.actions;
+export default eventSlice.reducer;

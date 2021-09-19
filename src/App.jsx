@@ -1,9 +1,10 @@
+//ROUTER
 import { HashRouter as Router, Switch, Route } from 'react-router-dom';
-
+//RENDER ROUTES
 import { routes } from './routes';
-
-import { Header } from './cmps/Header';
-import { Footer } from './cmps/Footer';
+//COMPONENTS
+import { Header } from './cmps/Header/Header';
+import { Footer } from './cmps/Footer/Footer';
 
 export const App = () => {
   return (
