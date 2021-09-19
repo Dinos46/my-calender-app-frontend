@@ -46,7 +46,8 @@ async function save(ev) {
 
 async function remove(evId) {
     try {
-        await Axios.delete(`${BASE_URL}event/${evId}`);
+        const { data } = await Axios.delete(`${BASE_URL}event/${evId}`);
+        return data
     } catch (err) {
         console.error(`cant remove event ${evId}`, err);
     };

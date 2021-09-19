@@ -14,7 +14,6 @@ export const Calendar = () => {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.event.events);
   const status = useSelector((state) => state.event.status);
-  console.log(status);
   const isDark = useSelector((state) => state.theme.isDark);
   const evForDate = (date) => {
     if (date) {
@@ -67,7 +66,7 @@ export const Calendar = () => {
     );
     const daysArr = createCalendarDays(emptyDaySquare, evForDate, monthNav);
     setDays(daysArr);
-  }, [state, monthNav, weekDays, evForDate]);
+  }, [state, monthNav]);
 
   const onNextMonth = () => setMonthNav(monthNav + 1);
   const onPrevMonth = () => setMonthNav(monthNav - 1);
