@@ -67,7 +67,7 @@ export const Calendar = () => {
     );
     const daysArr = createCalendarDays(emptyDaySquare, evForDate, monthNav);
     setDays(daysArr);
-  }, [state, monthNav]);
+  }, [state, monthNav, weekDays, evForDate]);
 
   const onNextMonth = () => setMonthNav(monthNav + 1);
   const onPrevMonth = () => setMonthNav(monthNav - 1);
