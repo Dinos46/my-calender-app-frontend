@@ -47,7 +47,7 @@ export const AddEditEvent = () => {
 
   const deleteEvent = (ev) => {
     ev.preventDefault();
-    dispatch(removeEvent());
+    dispatch(removeEvent(_id));
     if (status === 'success') {
       history.push('/');
     }
@@ -64,6 +64,7 @@ export const AddEditEvent = () => {
             type='text'
             name='des'
             id='des'
+            required
             value={event?.description}
             onChange={handleChange}
           />
