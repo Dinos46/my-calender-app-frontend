@@ -1,12 +1,18 @@
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 export const CalendarBody = ({
   day: { value, isCurrDay, date, event },
   onSelect,
   isDark,
 }) => {
-  // console.log(event);
+  const { push } = useHistory();
+
+  const onMoveToSavePage = () => {
+    if (!date) return;
+    push(`/save/${event?._id || ''}`);
+  };
+
   return (
-    <Link to={`/save/${event?._id || ''}`}>
+    <button className='btn' onClick={onMoveToSavePage}>
       <div
         className={`day-tile ${value} ${isCurrDay && 'current'} flex ${
           isDark ? 'dark' : ''
@@ -16,6 +22,6 @@ export const CalendarBody = ({
         {value}
         {event && <span className='ev-title'>{event.description}</span>}
       </div>
-    </Link>
+    </button>
   );
 };

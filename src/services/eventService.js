@@ -26,7 +26,7 @@ async function getById(_id) {
         const { data } = await Axios.get(`${BASE_URL}event/${_id}`);
         return data;
     } catch (err) {
-        console.log('cant get stay', err);
+        console.error('cant get stay', err);
     };
 };
 

@@ -84,7 +84,7 @@ export const Calendar = () => {
       />
       <div className='calendar grid'>
         {weekDays.map((day) => {
-          const shortDayName = day.replace('day', '');
+          const shortDayName = day[0] + day[1] + day[2];
           return (
             <h3 key={day} className={`day ${day} ${isDark ? 'dark' : ''}`}>
               {shortDayName}

@@ -18,7 +18,7 @@ export const addEvent = createAsyncThunk(
         try {
             return await eventService.save(ev);
         } catch (err) {
-            console.log('cant add event', err);
+            console.error('cant add event', err);
         };
     }
 );
@@ -29,7 +29,7 @@ export const editEvent = createAsyncThunk(
         try {
             return await eventService.save(ev);
         } catch (err) {
-            console.log('cant edit event', err);
+            console.error('cant edit event', err);
         };
     }
 );
@@ -40,7 +40,7 @@ export const removeEvent = createAsyncThunk(
         try {
             return await eventService.remove(evId);
         } catch (err) {
-            console.log('cant remove event', err);
+            console.error('cant remove event', err);
         };
     }
 );
