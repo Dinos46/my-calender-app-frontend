@@ -38,7 +38,8 @@ export const removeEvent = createAsyncThunk(
     'events/removeEvent',
     async (evId) => {
         try {
-            return await eventService.remove(evId);
+            await eventService.remove(evId);
+            return evId
         } catch (err) {
             console.error('cant remove event', err);
         };

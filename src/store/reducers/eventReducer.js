@@ -30,8 +30,7 @@ export const eventReducer = {
         state.status = 'loading';
     },
     [removeEvent.fulfilled]: (state, { payload }) => {
-        const filtered = state.events.filter(ev => payload._id !== ev._id);
-        state.events = [...filtered];
+        state.events.filter(ev => payload !== ev._id);
         state.status = 'success';
     },
     [removeEvent.rejected]: (state) => {
