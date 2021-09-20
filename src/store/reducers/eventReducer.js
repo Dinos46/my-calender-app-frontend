@@ -30,7 +30,8 @@ export const eventReducer = {
         state.status = 'loading';
     },
     [removeEvent.fulfilled]: (state, { payload }) => {
-        state.events.filter(ev => payload !== ev._id);
+        const idx = state.events.findIndex(ev => payload === ev._id)
+        state.events.splice(idx, 1)
         state.status = 'success';
     },
     [removeEvent.rejected]: (state) => {
